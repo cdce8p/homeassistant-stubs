@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import paho.mqtt.client as mqtt
 import socket
 import ssl
@@ -100,6 +101,7 @@ class MQTT:
     @property
     def subscriptions(self) -> set[Subscription]: ...
     def cleanup(self) -> None: ...
+    @contextlib.asynccontextmanager
     async def _async_connect_in_executor(self) -> AsyncGenerator[None]: ...
     async def async_init_client(self) -> None: ...
     @callback

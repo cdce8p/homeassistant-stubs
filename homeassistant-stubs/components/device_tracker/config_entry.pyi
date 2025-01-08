@@ -14,6 +14,7 @@ from homeassistant.helpers.entity_platform import EntityPlatform as EntityPlatfo
 from homeassistant.helpers.typing import StateType as StateType
 from homeassistant.util.hass_dict import HassKey as HassKey
 from propcache import cached_property
+from typing import final
 
 DATA_COMPONENT: HassKey[EntityComponent[BaseTrackerEntity]]
 DATA_KEY: HassKey[dict[str, tuple[str, str]]]
@@ -61,6 +62,7 @@ class TrackerEntity(BaseTrackerEntity, cached_properties=CACHED_TRACKER_PROPERTI
     def longitude(self) -> float | None: ...
     @property
     def state(self) -> str | None: ...
+    @final
     @property
     def state_attributes(self) -> dict[str, StateType]: ...
 
@@ -86,6 +88,7 @@ class ScannerEntity(BaseTrackerEntity, cached_properties=CACHED_SCANNER_PROPERTI
     def is_connected(self) -> bool: ...
     @property
     def unique_id(self) -> str | None: ...
+    @final
     @property
     def device_info(self) -> DeviceInfo | None: ...
     @property
@@ -96,5 +99,6 @@ class ScannerEntity(BaseTrackerEntity, cached_properties=CACHED_SCANNER_PROPERTI
     def find_device_entry(self) -> dr.DeviceEntry | None: ...
     registry_entry: Incomplete
     async def async_internal_added_to_hass(self) -> None: ...
+    @final
     @property
     def state_attributes(self) -> dict[str, StateType]: ...

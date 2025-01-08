@@ -6,6 +6,7 @@ from _typeshed import Incomplete
 from collections.abc import Callable as Callable
 from dataclasses import dataclass
 from datetime import datetime
+from functools import lru_cache
 from homeassistant.components.sensor import SensorDeviceClass as SensorDeviceClass, SensorEntity as SensorEntity, SensorEntityDescription as SensorEntityDescription, SensorStateClass as SensorStateClass
 from homeassistant.const import EntityCategory as EntityCategory, PERCENTAGE as PERCENTAGE, UnitOfDataRate as UnitOfDataRate, UnitOfInformation as UnitOfInformation, UnitOfTemperature as UnitOfTemperature
 from homeassistant.core import HomeAssistant as HomeAssistant, callback as callback
@@ -25,6 +26,7 @@ SENSOR_TYPE_DEVICE_CLASS: int
 SENSOR_TYPE_MANDATORY_ARG: int
 SIGNAL_SYSTEMMONITOR_UPDATE: str
 
+@lru_cache
 def get_cpu_icon() -> Literal['mdi:cpu-64-bit', 'mdi:cpu-32-bit']: ...
 def get_network(entity: SystemMonitorSensor) -> float | None: ...
 def get_packets(entity: SystemMonitorSensor) -> float | None: ...

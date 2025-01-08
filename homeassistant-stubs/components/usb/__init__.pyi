@@ -2,6 +2,7 @@ import dataclasses
 from .models import USBDevice
 from _typeshed import Incomplete
 from collections.abc import Coroutine
+from homeassistant.components import websocket_api
 from homeassistant.core import CALLBACK_TYPE, Event, HomeAssistant, callback as hass_callback
 from homeassistant.data_entry_flow import BaseServiceInfo
 from homeassistant.helpers.debounce import Debouncer

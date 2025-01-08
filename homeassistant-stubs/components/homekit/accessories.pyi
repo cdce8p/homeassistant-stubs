@@ -17,6 +17,7 @@ from pyhap.accessory_driver import AccessoryDriver
 from pyhap.characteristic import Characteristic
 from pyhap.iid_manager import IIDManager
 from pyhap.service import Service as Service
+from pyhap.util import callback as pyhap_callback
 from typing import Any
 from uuid import UUID
 
@@ -48,6 +49,7 @@ class HomeAccessory(Accessory):
     @property
     def available(self) -> bool: ...
     @ha_callback
+    @pyhap_callback
     def run(self) -> None: ...
     @ha_callback
     def async_update_event_state_callback(self, event: Event[EventStateChangedData]) -> None: ...
@@ -82,7 +84,9 @@ class HomeDriver(AccessoryDriver):
     _entry_title: Incomplete
     iid_storage: Incomplete
     def __init__(self, hass: HomeAssistant, entry_id: str, bridge_name: str, entry_title: str, iid_storage: AccessoryIIDStorage, **kwargs: Any) -> None: ...
+    @pyhap_callback
     def pair(self, client_username_bytes: bytes, client_public: str, client_permissions: int) -> bool: ...
+    @pyhap_callback
     def unpair(self, client_uuid: UUID) -> None: ...
 
 class HomeIIDManager(IIDManager):

@@ -16,4 +16,5 @@ class DownloadBackupView(HomeAssistantView):
 class UploadBackupView(HomeAssistantView):
     url: str
     name: str
+    @require_admin
     async def post(self, request: Request) -> Response: ...

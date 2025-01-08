@@ -15,7 +15,9 @@ class EsphomeText(EsphomeEntity[TextInfo, TextState], TextEntity):
     @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
+    @esphome_state_property
     def native_value(self) -> str | None: ...
+    @convert_api_error_ha_error
     async def async_set_value(self, value: str) -> None: ...
 
 async_setup_entry: Incomplete

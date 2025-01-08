@@ -20,6 +20,7 @@ class TPLinkSelectEntity(CoordinatedTPLinkFeatureEntity, SelectEntity):
     entity_description: TPLinkSelectEntityDescription
     _attr_options: Incomplete
     def __init__(self, device: Device, coordinator: TPLinkDataUpdateCoordinator, *, feature: Feature, description: TPLinkFeatureEntityDescription, parent: Device | None = None) -> None: ...
+    @async_refresh_after
     async def async_select_option(self, option: str) -> None: ...
     _attr_current_option: Incomplete
     @callback

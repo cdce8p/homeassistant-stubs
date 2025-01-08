@@ -11,7 +11,7 @@ from homeassistant.helpers.typing import ConfigType as ConfigType
 from homeassistant.loader import bind_hass as bind_hass
 from homeassistant.util.hass_dict import HassKey as HassKey
 from propcache import cached_property
-from typing import Any
+from typing import Any, final
 
 _LOGGER: Incomplete
 DATA_COMPONENT: HassKey[EntityComponent[HumidifierEntity]]
@@ -54,6 +54,7 @@ class HumidifierEntity(ToggleEntity, cached_properties=CACHED_PROPERTIES_WITH_AT
     def capability_attributes(self) -> dict[str, Any]: ...
     @cached_property
     def device_class(self) -> HumidifierDeviceClass | None: ...
+    @final
     @property
     def state_attributes(self) -> dict[str, Any]: ...
     @cached_property

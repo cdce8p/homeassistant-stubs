@@ -20,7 +20,7 @@ from homeassistant.util.async_ import create_eager_task as create_eager_task
 from homeassistant.util.yaml import dump as dump
 from propcache import cached_property
 from types import ModuleType
-from typing import Any, Final, Protocol
+from typing import Any, Final, Protocol, final
 
 SERVICE_SEE: Final[str]
 SOURCE_TYPES: Incomplete
@@ -108,6 +108,7 @@ class Device(RestoreEntity):
     def state(self) -> str: ...
     @property
     def entity_picture(self) -> str | None: ...
+    @final
     @property
     def state_attributes(self) -> dict[str, StateType]: ...
     @property

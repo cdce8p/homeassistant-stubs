@@ -5,6 +5,7 @@ from .util import cleanup_name_for_homekit as cleanup_name_for_homekit
 from _typeshed import Incomplete
 from homeassistant.core import CALLBACK_TYPE as CALLBACK_TYPE, Context as Context, callback as callback
 from homeassistant.helpers.trigger import async_initialize_triggers as async_initialize_triggers
+from pyhap.util import callback as pyhap_callback
 from typing import Any
 
 _LOGGER: Incomplete
@@ -17,6 +18,7 @@ class DeviceTriggerAccessory(HomeAccessory):
     @callback
     def _remove_triggers_if_configured(self) -> None: ...
     async def async_attach(self) -> None: ...
+    @pyhap_callback
     @callback
     def run(self) -> None: ...
     async def async_trigger(self, run_variables: dict[str, Any], context: Context | None = None, skip_condition: bool = False) -> None: ...

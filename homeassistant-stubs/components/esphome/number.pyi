@@ -18,7 +18,9 @@ class EsphomeNumber(EsphomeEntity[NumberInfo, NumberState], NumberEntity):
     @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
+    @esphome_float_state_property
     def native_value(self) -> float | None: ...
+    @convert_api_error_ha_error
     async def async_set_native_value(self, value: float) -> None: ...
 
 async_setup_entry: Incomplete

@@ -13,7 +13,7 @@ from homeassistant.components.media_player import async_process_play_media_url a
 from homeassistant.core import Context as Context, callback as callback
 from homeassistant.helpers import entity as entity
 from homeassistant.helpers.entity import EntityDescription as EntityDescription
-from typing import Any, Final, Literal
+from typing import Any, Final, Literal, final
 
 _CONVERSATION_TIMEOUT_SEC: Final[Incomplete]
 _LOGGER: Incomplete
@@ -58,6 +58,7 @@ class AssistSatelliteEntity(entity.Entity, metaclass=abc.ABCMeta):
     _attr_tts_options: dict[str, Any] | None
     _pipeline_task: asyncio.Task | None
     __assist_satellite_state: Incomplete
+    @final
     @property
     def state(self) -> str | None: ...
     @property

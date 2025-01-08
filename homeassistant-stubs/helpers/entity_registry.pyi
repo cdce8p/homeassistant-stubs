@@ -93,6 +93,7 @@ class RegistryEntry:
     translation_key: str | None
     unit_of_measurement: str | None
     _cache: dict[str, Any]
+    @domain.default
     def _domain_default(self) -> str: ...
     @property
     def disabled(self) -> bool: ...
@@ -129,6 +130,7 @@ class DeletedRegistryEntry:
     created_at: datetime
     modified_at: datetime
     _cache: dict[str, Any]
+    @domain.default
     def _domain_default(self) -> str: ...
     @under_cached_property
     def as_storage_fragment(self) -> json_fragment: ...

@@ -15,7 +15,7 @@ from homeassistant.helpers.typing import ConfigType as ConfigType
 from homeassistant.loader import bind_hass as bind_hass
 from homeassistant.util.hass_dict import HassKey as HassKey
 from propcache import cached_property
-from typing import Any
+from typing import Any, final
 
 _LOGGER: Incomplete
 DATA_COMPONENT: HassKey[EntityComponent[StateVacuumEntity]]
@@ -111,6 +111,7 @@ class StateVacuumEntity(Entity, cached_properties=STATE_VACUUM_CACHED_PROPERTIES
     def fan_speed_list(self) -> list[str]: ...
     @property
     def state_attributes(self) -> dict[str, Any]: ...
+    @final
     @property
     def state(self) -> str | None: ...
     @cached_property

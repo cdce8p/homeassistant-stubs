@@ -6,6 +6,7 @@ from homeassistant.const import ATTR_ENTITY_ID as ATTR_ENTITY_ID, ATTR_SUPPORTED
 from homeassistant.core import Event as Event, EventStateChangedData as EventStateChangedData, HassJobType as HassJobType, State as State, callback as callback
 from homeassistant.helpers.event import async_track_state_change_event as async_track_state_change_event
 from pyhap.service import Service as Service
+from pyhap.util import callback as pyhap_callback
 from typing import Any
 
 DOOR_CURRENT_HASS_TO_HK: Incomplete
@@ -20,6 +21,7 @@ class GarageDoorOpener(HomeAccessory):
     linked_obstruction_sensor: Incomplete
     def __init__(self, *args: Any) -> None: ...
     @callback
+    @pyhap_callback
     def run(self) -> None: ...
     @callback
     def _async_update_obstruction_event(self, event: Event[EventStateChangedData]) -> None: ...

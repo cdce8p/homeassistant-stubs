@@ -12,7 +12,7 @@ from homeassistant.helpers.typing import ConfigType as ConfigType
 from homeassistant.loader import bind_hass as bind_hass
 from homeassistant.util.hass_dict import HassKey as HassKey
 from propcache import cached_property
-from typing import Any
+from typing import Any, final
 
 _LOGGER: Incomplete
 DATA_COMPONENT: HassKey[EntityComponent[CoverEntity]]
@@ -91,7 +91,9 @@ class CoverEntity(Entity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
     @cached_property
     def device_class(self) -> CoverDeviceClass | None: ...
     @property
+    @final
     def state(self) -> str | None: ...
+    @final
     @property
     def state_attributes(self) -> dict[str, Any]: ...
     @property

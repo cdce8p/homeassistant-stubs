@@ -2,6 +2,7 @@ import asyncio
 import concurrent.futures
 import datetime
 import enum
+import functools
 import threading
 import voluptuous as vol
 from . import util as util
@@ -290,6 +291,7 @@ class _OneTimeListener(Generic[_DataT]):
 
 EMPTY_LIST: list[Any]
 
+@functools.lru_cache
 def _verify_event_type_length_or_raise(event_type: EventType[_DataT] | str) -> None: ...
 
 class EventBus:

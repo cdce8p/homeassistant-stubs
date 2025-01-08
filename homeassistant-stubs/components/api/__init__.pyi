@@ -1,6 +1,7 @@
 import homeassistant.core as ha
 from _typeshed import Incomplete
 from aiohttp import web
+from functools import lru_cache
 from homeassistant.auth.models import User as User
 from homeassistant.auth.permissions.const import POLICY_READ as POLICY_READ
 from homeassistant.components.http import HomeAssistantView as HomeAssistantView, KEY_HASS as KEY_HASS, KEY_HASS_USER as KEY_HASS_USER, require_admin as require_admin
@@ -47,6 +48,7 @@ class APICoreStateView(HomeAssistantView):
 class APIEventStream(HomeAssistantView):
     url = URL_API_STREAM
     name: str
+    @require_admin
     async def get(self, request: web.Request) -> web.StreamResponse: ...
 
 class APIConfigView(HomeAssistantView):
@@ -79,6 +81,7 @@ class APIEventListenersView(HomeAssistantView):
 class APIEventView(HomeAssistantView):
     url: str
     name: str
+    @require_admin
     async def post(self, request: web.Request, event_type: str) -> web.Response: ...
 
 class APIServicesView(HomeAssistantView):
@@ -97,16 +100,19 @@ class APIComponentsView(HomeAssistantView):
     @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
+@lru_cache
 def _cached_template(template_str: str, hass: HomeAssistant) -> template.Template: ...
 
 class APITemplateView(HomeAssistantView):
     url = URL_API_TEMPLATE
     name: str
+    @require_admin
     async def post(self, request: web.Request) -> web.Response: ...
 
 class APIErrorLog(HomeAssistantView):
     url = URL_API_ERROR_LOG
     name: str
+    @require_admin
     async def get(self, request: web.Request) -> web.FileResponse: ...
 
 async def async_services_json(hass: HomeAssistant) -> list[dict[str, Any]]: ...

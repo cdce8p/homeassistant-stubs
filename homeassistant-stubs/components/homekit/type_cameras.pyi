@@ -11,6 +11,7 @@ from homeassistant.core import Event as Event, EventStateChangedData as EventSta
 from homeassistant.helpers.event import async_track_state_change_event as async_track_state_change_event, async_track_time_interval as async_track_time_interval
 from homeassistant.util.async_ import create_eager_task as create_eager_task
 from pyhap.camera import Camera as PyhapCamera
+from pyhap.util import callback as pyhap_callback
 from typing import Any
 
 _LOGGER: Incomplete
@@ -31,6 +32,7 @@ class Camera(HomeDoorbellAccessory, PyhapCamera):
     linked_motion_sensor: str | None
     motion_is_event: bool
     def __init__(self, hass: HomeAssistant, driver: HomeDriver, name: str, entity_id: str, aid: int, config: dict[str, Any]) -> None: ...
+    @pyhap_callback
     @callback
     def run(self) -> None: ...
     @callback

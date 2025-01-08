@@ -12,7 +12,7 @@ from homeassistant.helpers.storage import Store as Store
 from homeassistant.helpers.typing import ConfigType as ConfigType, VolDictType as VolDictType
 from homeassistant.util import slugify as slugify
 from homeassistant.util.hass_dict import HassKey as HassKey
-from typing import Any
+from typing import Any, final
 
 _LOGGER: Incomplete
 LAST_SCANNED: str
@@ -70,6 +70,7 @@ class TagEntity(Entity):
     @callback
     def async_handle_event(self, device_id: str | None, last_scanned: str | None) -> None: ...
     @property
+    @final
     def state(self) -> str | None: ...
     @property
     def extra_state_attributes(self) -> dict[str, Any]: ...

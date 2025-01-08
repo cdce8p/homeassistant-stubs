@@ -2,6 +2,7 @@ from .const import DOMAIN as DOMAIN, MEDIA_CLASS_MAP as MEDIA_CLASS_MAP, MEDIA_M
 from .error import MediaSourceError as MediaSourceError, Unresolvable as Unresolvable
 from .models import BrowseMediaSource as BrowseMediaSource, MediaSource as MediaSource, MediaSourceItem as MediaSourceItem, PlayMedia as PlayMedia
 from collections.abc import Callable
+from homeassistant.components import websocket_api
 from homeassistant.components.media_player import BrowseMedia
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.typing import UndefinedType

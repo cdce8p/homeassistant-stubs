@@ -4,6 +4,7 @@ from .const import CONF_RECEIVER_MAX_VOLUME as CONF_RECEIVER_MAX_VOLUME, CONF_SO
 from .receiver import Receiver as Receiver, async_discover as async_discover
 from .services import DATA_MP_ENTITIES as DATA_MP_ENTITIES
 from _typeshed import Incomplete
+from functools import cache
 from homeassistant.components.media_player import MediaPlayerEntity as MediaPlayerEntity, MediaPlayerEntityFeature as MediaPlayerEntityFeature, MediaPlayerState as MediaPlayerState, MediaType as MediaType
 from homeassistant.config_entries import SOURCE_IMPORT as SOURCE_IMPORT
 from homeassistant.const import CONF_HOST as CONF_HOST, CONF_NAME as CONF_NAME
@@ -34,7 +35,9 @@ ISSUE_URL_PLACEHOLDER: str
 type LibValue = str | tuple[str, ...]
 
 def _get_single_lib_value(value: LibValue) -> str: ...
+@cache
 def _input_source_lib_mappings(zone: str) -> dict[InputSource, LibValue]: ...
+@cache
 def _rev_input_source_lib_mappings(zone: str) -> dict[LibValue, InputSource]: ...
 async def async_setup_platform(hass: HomeAssistant, config: ConfigType, async_add_entities: AddEntitiesCallback, discovery_info: DiscoveryInfoType | None = None) -> None: ...
 async def async_setup_entry(hass: HomeAssistant, entry: OnkyoConfigEntry, async_add_entities: AddEntitiesCallback) -> None: ...

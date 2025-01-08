@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import contextvars
 from . import core as core, loader as loader, requirements as requirements
 from .const import BASE_PLATFORMS as BASE_PLATFORMS, EVENT_COMPONENT_LOADED as EVENT_COMPONENT_LOADED, EVENT_HOMEASSISTANT_START as EVENT_HOMEASSISTANT_START, PLATFORM_FORMAT as PLATFORM_FORMAT
@@ -62,8 +63,10 @@ class SetupPhases(StrEnum):
     WAIT_IMPORT_PACKAGES = 'wait_import_packages'
 
 def _setup_started(hass: core.HomeAssistant) -> dict[tuple[str, str | None], float]: ...
+@contextlib.contextmanager
 def async_pause_setup(hass: core.HomeAssistant, phase: SetupPhases) -> Generator[None]: ...
 def _setup_times(hass: core.HomeAssistant) -> defaultdict[str, defaultdict[str | None, defaultdict[SetupPhases, float]]]: ...
+@contextlib.contextmanager
 def async_start_setup(hass: core.HomeAssistant, integration: str, phase: SetupPhases, group: str | None = None) -> Generator[None]: ...
 @callback
 def async_get_setup_timings(hass: core.HomeAssistant) -> dict[str, float]: ...

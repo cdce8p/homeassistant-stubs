@@ -33,6 +33,7 @@ from collections.abc import Callable, Coroutine, Generator, Iterable, Mapping, V
 from contextvars import ContextVar
 from datetime import datetime
 from enum import Enum, StrEnum
+from functools import cache
 from propcache import cached_property
 from types import MappingProxyType
 from typing import Any, Generic, Self
@@ -86,6 +87,7 @@ RECONFIGURE_NOTIFICATION_ID: str
 EVENT_FLOW_DISCOVERED: str
 SIGNAL_CONFIG_ENTRY_CHANGED: Incomplete
 
+@cache
 def signal_discovered_config_entry_removed(discovery_domain: str) -> SignalType[ConfigEntry]: ...
 
 NO_RESET_TRIES_STATES: Incomplete
