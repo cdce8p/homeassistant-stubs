@@ -2,6 +2,7 @@ from .config import Config as Config
 from _typeshed import Incomplete
 from aiohttp import web as web
 from collections.abc import Iterable
+from functools import lru_cache
 from homeassistant import core as core
 from homeassistant.components import climate as climate, cover as cover, fan as fan, humidifier as humidifier, light as light, media_player as media_player, scene as scene, script as script
 from homeassistant.components.climate import ClimateEntityFeature as ClimateEntityFeature, SERVICE_SET_TEMPERATURE as SERVICE_SET_TEMPERATURE
@@ -51,6 +52,7 @@ UNAUTHORIZED_USER: Incomplete
 DIMMABLE_SUPPORTED_FEATURES_BY_DOMAIN: Incomplete
 ENTITY_FEATURES_BY_DOMAIN: Incomplete
 
+@lru_cache(maxsize=32)
 def _remote_is_allowed(address: str) -> bool: ...
 
 class HueUnauthorizedUser(HomeAssistantView):
@@ -131,8 +133,10 @@ class HueOneLightChangeView(HomeAssistantView):
     async def put(self, request: web.Request, username: str, entity_number: str) -> web.Response: ...
 
 def get_entity_state_dict(config: Config, entity: State) -> dict[str, Any]: ...
+@lru_cache(maxsize=512)
 def _build_entity_state_dict(entity: State) -> dict[str, Any]: ...
 def _clamp_values(data: dict[str, Any]) -> None: ...
+@lru_cache(maxsize=1024)
 def _entity_unique_id(entity_id: str) -> str: ...
 def state_to_json(config: Config, state: State) -> dict[str, Any]: ...
 def state_supports_hue_brightness(state: State, color_modes: Iterable[ColorMode]) -> bool: ...

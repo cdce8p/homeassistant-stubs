@@ -59,5 +59,6 @@ class LogErrorHandler(logging.Handler):
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'system_log/list'})
 @callback
 def list_errors(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

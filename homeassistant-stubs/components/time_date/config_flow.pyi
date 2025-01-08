@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .const import CONF_DISPLAY_OPTIONS as CONF_DISPLAY_OPTIONS, DOMAIN as DOMAIN, OPTION_TYPES as OPTION_TYPES
 from .sensor import TimeDateSensor as TimeDateSensor
 from _typeshed import Incomplete
@@ -24,5 +25,6 @@ class TimeDateConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
     @staticmethod
     async def async_setup_preview(hass: HomeAssistant) -> None: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'time_date/start_preview', INCOMPLETE: str, INCOMPLETE: vol.Any('config_flow'), INCOMPLETE: dict})
 @websocket_api.async_response
 async def ws_start_preview(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

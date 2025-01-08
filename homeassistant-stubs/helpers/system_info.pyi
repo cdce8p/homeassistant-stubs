@@ -11,6 +11,7 @@ from typing import Any
 _LOGGER: Incomplete
 _DATA_MAC_VER: str
 
+@singleton(_DATA_MAC_VER)
 async def async_get_mac_ver(hass: HomeAssistant) -> str: ...
 
 cached_get_user: Incomplete

@@ -1,11 +1,13 @@
 from _typeshed import Incomplete
 from datetime import timedelta
+from functools import lru_cache
 from jwt import PyJWS, PyJWT
 from typing import Any
 
 __all__ = ['unverified_hs256_token_decode', 'verify_and_decode']
 
 class _PyJWSWithLoadCache(PyJWS):
+    @lru_cache(maxsize=JWT_TOKEN_CACHE_SIZE)
     def _load(self, jwt: str | bytes) -> tuple[bytes, bytes, dict, bytes]: ...
 
 class _PyJWTWithVerify(PyJWT):

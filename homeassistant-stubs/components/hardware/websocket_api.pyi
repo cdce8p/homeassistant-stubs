@@ -16,7 +16,9 @@ class SystemStatus:
     subscribers: set[tuple[websocket_api.ActiveConnection, int]]
 
 async def async_setup(hass: HomeAssistant) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'hardware/info'})
 @websocket_api.async_response
 async def ws_info(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'hardware/subscribe_system_status'})
 def ws_subscribe_system_status(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

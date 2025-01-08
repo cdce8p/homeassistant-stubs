@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .const import CONF_CALIBRATION_FACTOR as CONF_CALIBRATION_FACTOR, CONF_INDOOR_HUMIDITY as CONF_INDOOR_HUMIDITY, CONF_INDOOR_TEMP as CONF_INDOOR_TEMP, CONF_OUTDOOR_TEMP as CONF_OUTDOOR_TEMP, DEFAULT_NAME as DEFAULT_NAME, DOMAIN as DOMAIN
 from .sensor import MoldIndicator as MoldIndicator
 from _typeshed import Incomplete
@@ -26,5 +27,6 @@ class MoldIndicatorConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
     @staticmethod
     async def async_setup_preview(hass: HomeAssistant) -> None: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'mold_indicator/start_preview', INCOMPLETE: str, INCOMPLETE: vol.Any('config_flow', 'options_flow'), INCOMPLETE: dict})
 @callback
 def ws_start_preview(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

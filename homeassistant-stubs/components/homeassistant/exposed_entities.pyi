@@ -1,4 +1,5 @@
 import dataclasses
+import voluptuous as vol
 from .const import DATA_EXPOSED_ENTITIES as DATA_EXPOSED_ENTITIES, DOMAIN as DOMAIN
 from _typeshed import Incomplete
 from collections.abc import Callable as Callable, Mapping
@@ -72,15 +73,19 @@ class ExposedEntities:
 
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'homeassistant/expose_entity', INCOMPLETE: [vol.In(KNOWN_ASSISTANTS)], INCOMPLETE: [str], INCOMPLETE: bool})
 def ws_expose_entity(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'homeassistant/expose_entity/list'})
 def ws_list_exposed_entities(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'homeassistant/expose_new_entities/get', INCOMPLETE: vol.In(KNOWN_ASSISTANTS)})
 def ws_expose_new_entities_get(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'homeassistant/expose_new_entities/set', INCOMPLETE: vol.In(KNOWN_ASSISTANTS), INCOMPLETE: bool})
 def ws_expose_new_entities_set(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 def async_listen_entity_updates(hass: HomeAssistant, assistant: str, listener: Callable[[], None]) -> CALLBACK_TYPE: ...

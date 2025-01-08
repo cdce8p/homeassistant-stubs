@@ -32,6 +32,7 @@ STORAGE_VERSION_MAJOR: int
 STORAGE_VERSION_MINOR: int
 SAVE_DELAY: int
 
+@singleton(DATA_MULTIPROTOCOL_ADDON_MANAGER)
 async def get_multiprotocol_addon_manager(hass: HomeAssistant) -> MultiprotocolAddonManager: ...
 
 class WaitingAddonManager(AddonManager):
@@ -64,6 +65,7 @@ class MultipanProtocol(Protocol):
     async def async_get_channel(self, hass: HomeAssistant) -> int | None: ...
     async def async_using_multipan(self, hass: HomeAssistant) -> bool: ...
 
+@singleton(DATA_FLASHER_ADDON_MANAGER)
 @callback
 def get_flasher_addon_manager(hass: HomeAssistant) -> WaitingAddonManager: ...
 

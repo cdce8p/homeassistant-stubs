@@ -18,48 +18,57 @@ def async_get_node(func: Callable[[HomeAssistant, ActiveConnection, dict[str, An
 def async_get_matter_adapter(func: Callable[[HomeAssistant, ActiveConnection, dict[str, Any], MatterAdapter], Coroutine[Any, Any, None]]) -> Callable[[HomeAssistant, ActiveConnection, dict[str, Any]], Coroutine[Any, Any, None]]: ...
 def async_handle_failed_command[**_P](func: Callable[Concatenate[HomeAssistant, ActiveConnection, dict[str, Any], _P], Coroutine[Any, Any, None]]) -> Callable[Concatenate[HomeAssistant, ActiveConnection, dict[str, Any], _P], Coroutine[Any, Any, None]]: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/commission', INCOMPLETE: str, INCOMPLETE: bool})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 async def websocket_commission(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/commission_on_network', INCOMPLETE: int, INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 async def websocket_commission_on_network(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/set_thread', INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 async def websocket_set_thread_dataset(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/set_wifi_credentials', INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 async def websocket_set_wifi_credentials(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'matter/node_diagnostics', INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 @async_get_node
 async def websocket_node_diagnostics(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter, node: MatterNode) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'matter/ping_node', INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 @async_get_node
 async def websocket_ping_node(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter, node: MatterNode) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/open_commissioning_window', INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 @async_get_node
 async def websocket_open_commissioning_window(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter, node: MatterNode) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/remove_matter_fabric', INCOMPLETE: str, INCOMPLETE: int})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter
 @async_get_node
 async def websocket_remove_matter_fabric(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any], matter: MatterAdapter, node: MatterNode) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'matter/interview_node', INCOMPLETE: str})
 @websocket_api.async_response
 @async_handle_failed_command
 @async_get_matter_adapter

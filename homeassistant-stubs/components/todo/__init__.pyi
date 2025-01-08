@@ -9,6 +9,7 @@ from homeassistant.config_entries import ConfigEntry as ConfigEntry
 from homeassistant.const import CONF_ENTITY_ID as CONF_ENTITY_ID
 from homeassistant.core import CALLBACK_TYPE as CALLBACK_TYPE, HomeAssistant as HomeAssistant, ServiceCall as ServiceCall, SupportsResponse as SupportsResponse, callback as callback
 from homeassistant.exceptions import HomeAssistantError as HomeAssistantError, ServiceValidationError as ServiceValidationError
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity as Entity
 from homeassistant.helpers.entity_component import EntityComponent as EntityComponent
 from homeassistant.helpers.typing import ConfigType as ConfigType
@@ -68,11 +69,14 @@ class TodoListEntity(Entity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
     @callback
     def _async_write_ha_state(self) -> None: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'todo/item/subscribe', INCOMPLETE: cv.entity_domain(DOMAIN)})
 @websocket_api.async_response
 async def websocket_handle_subscribe_todo_items(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 def _api_items_factory(obj: Iterable[tuple[str, Any]]) -> dict[str, str]: ...
+@websocket_api.websocket_command({INCOMPLETE: 'todo/item/list', INCOMPLETE: cv.entity_id})
 @websocket_api.async_response
 async def websocket_handle_todo_item_list(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'todo/item/move', INCOMPLETE: cv.entity_id, INCOMPLETE: cv.string, INCOMPLETE: cv.string})
 @websocket_api.async_response
 async def websocket_handle_todo_item_move(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 def _find_by_uid_or_summary(value: str, items: list[TodoItem] | None) -> TodoItem | None: ...

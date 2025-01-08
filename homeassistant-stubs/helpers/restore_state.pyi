@@ -42,6 +42,7 @@ class StoredState:
 
 async def async_load(hass: HomeAssistant) -> None: ...
 @callback
+@singleton(DATA_RESTORE_STATE)
 def async_get(hass: HomeAssistant) -> RestoreStateData: ...
 
 class RestoreStateData:

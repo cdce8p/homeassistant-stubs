@@ -1,6 +1,7 @@
 from .registry import BaseRegistryItems as BaseRegistryItems
 from dataclasses import dataclass, field
 from datetime import datetime
+from functools import lru_cache
 from homeassistant.util import dt as dt_util, slugify as slugify
 
 @dataclass(slots=True, frozen=True, kw_only=True)
@@ -11,6 +12,7 @@ class NormalizedNameBaseRegistryEntry:
     modified_at: datetime = field(default_factory=dt_util.utcnow)
     def __post_init__(self) -> None: ...
 
+@lru_cache(maxsize=1024)
 def normalize_name(name: str) -> str: ...
 
 class NormalizedNameBaseRegistryItems[_VT: NormalizedNameBaseRegistryEntry](BaseRegistryItems[_VT]):

@@ -6,6 +6,7 @@ from abc import abstractmethod
 from collections.abc import AsyncIterable
 from homeassistant.components import websocket_api
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.restore_state import RestoreEntity
 from typing import final
 

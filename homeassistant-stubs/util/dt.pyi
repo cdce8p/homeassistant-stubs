@@ -1,6 +1,7 @@
 import datetime as dt
 import zoneinfo
 from _typeshed import Incomplete
+from functools import lru_cache
 from homeassistant.helpers.deprecation import deprecated_function as deprecated_function
 from typing import Any, Literal, overload
 
@@ -13,6 +14,7 @@ STANDARD_DURATION_RE: Incomplete
 ISO8601_DURATION_RE: Incomplete
 POSTGRES_INTERVAL_RE: Incomplete
 
+@lru_cache(maxsize=1)
 def get_default_time_zone() -> dt.tzinfo: ...
 def set_default_time_zone(time_zone: dt.tzinfo) -> None: ...
 def get_time_zone(time_zone_str: str) -> zoneinfo.ZoneInfo | None: ...
@@ -27,6 +29,7 @@ def as_local(dattim: dt.datetime) -> dt.datetime: ...
 
 utc_from_timestamp: Incomplete
 
+@deprecated_function('datetime.timestamp', breaks_in_ha_version='2026.1')
 def utc_to_timestamp(utc_dt: dt.datetime) -> float: ...
 def start_of_local_day(dt_or_d: dt.date | dt.datetime | None = None) -> dt.datetime: ...
 @overload

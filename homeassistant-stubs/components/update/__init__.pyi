@@ -1,8 +1,10 @@
 from .const import ATTR_BACKUP as ATTR_BACKUP, ATTR_INSTALLED_VERSION as ATTR_INSTALLED_VERSION, ATTR_LATEST_VERSION as ATTR_LATEST_VERSION, ATTR_VERSION as ATTR_VERSION, DOMAIN as DOMAIN, SERVICE_INSTALL as SERVICE_INSTALL, SERVICE_SKIP as SERVICE_SKIP, UpdateEntityFeature as UpdateEntityFeature
 from _typeshed import Incomplete
 from enum import StrEnum
+from functools import lru_cache
 from homeassistant.components import websocket_api
 from homeassistant.const import EntityCategory
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import ABCCachedProperties, EntityDescription
 from homeassistant.helpers.restore_state import RestoreEntity
 from propcache import cached_property

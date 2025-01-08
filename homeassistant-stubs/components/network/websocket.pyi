@@ -9,11 +9,14 @@ from typing import Any
 @callback
 def async_register_websocket_commands(hass: HomeAssistant) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'network'})
 @websocket_api.async_response
 async def websocket_network_adapters(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'network/configure', INCOMPLETE: NETWORK_CONFIG_SCHEMA})
 @websocket_api.async_response
 async def websocket_network_adapters_configure(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'network/url'})
 def websocket_network_url(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...

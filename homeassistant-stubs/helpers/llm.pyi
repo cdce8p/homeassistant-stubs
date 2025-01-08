@@ -27,6 +27,7 @@ DEFAULT_INSTRUCTIONS_PROMPT: str
 
 @callback
 def async_render_no_api_prompt(hass: HomeAssistant) -> str: ...
+@singleton('llm')
 @callback
 def _async_get_apis(hass: HomeAssistant) -> dict[str, API]: ...
 @callback

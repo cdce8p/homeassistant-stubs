@@ -16,6 +16,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 class AndroidTVRemote(AndroidTVEntity, RemoteEntity):
     _attr_name: Incomplete
     _attr_should_poll: bool
+    @adb_decorator()
     async def async_turn_on(self, **kwargs: Any) -> None: ...
+    @adb_decorator()
     async def async_turn_off(self, **kwargs: Any) -> None: ...
+    @adb_decorator()
     async def async_send_command(self, command: Iterable[str], **kwargs: Any) -> None: ...

@@ -6,22 +6,28 @@ from collections.abc import Callable as Callable, Coroutine
 from homeassistant.components import websocket_api as websocket_api
 from homeassistant.core import HomeAssistant as HomeAssistant, callback as callback
 from homeassistant.exceptions import HomeAssistantError as HomeAssistantError
+from homeassistant.helpers import config_validation as cv
 from homeassistant.util import yaml as yaml
 from typing import Any
 
 @callback
 def async_setup(hass: HomeAssistant) -> None: ...
 def _ws_with_blueprint_domain(func: Callable[[HomeAssistant, websocket_api.ActiveConnection, dict[str, Any], models.DomainBlueprints], Coroutine[Any, Any, None]]) -> websocket_api.AsyncWebSocketCommandHandler: ...
+@websocket_api.websocket_command({INCOMPLETE: 'blueprint/list', INCOMPLETE: cv.string})
 @websocket_api.async_response
 async def ws_list_blueprints(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'blueprint/import', INCOMPLETE: cv.url})
 @websocket_api.async_response
 async def ws_import_blueprint(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'blueprint/save', INCOMPLETE: cv.string, INCOMPLETE: cv.path, INCOMPLETE: cv.string, INCOMPLETE: cv.url, INCOMPLETE: bool})
 @websocket_api.async_response
 @_ws_with_blueprint_domain
 async def ws_save_blueprint(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any], domain_blueprints: models.DomainBlueprints) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'blueprint/delete', INCOMPLETE: cv.string, INCOMPLETE: cv.path})
 @websocket_api.async_response
 @_ws_with_blueprint_domain
 async def ws_delete_blueprint(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any], domain_blueprints: models.DomainBlueprints) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'blueprint/substitute', INCOMPLETE: cv.string, INCOMPLETE: cv.path, INCOMPLETE: dict})
 @websocket_api.async_response
 @_ws_with_blueprint_domain
 async def ws_substitute_blueprint(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any], domain_blueprints: models.DomainBlueprints) -> None: ...

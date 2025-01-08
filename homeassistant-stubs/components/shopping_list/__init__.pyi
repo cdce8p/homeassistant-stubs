@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .const import ATTR_REVERSE as ATTR_REVERSE, DEFAULT_REVERSE as DEFAULT_REVERSE, DOMAIN as DOMAIN, EVENT_SHOPPING_LIST_UPDATED as EVENT_SHOPPING_LIST_UPDATED, SERVICE_ADD_ITEM as SERVICE_ADD_ITEM, SERVICE_CLEAR_COMPLETED_ITEMS as SERVICE_CLEAR_COMPLETED_ITEMS, SERVICE_COMPLETE_ALL as SERVICE_COMPLETE_ALL, SERVICE_COMPLETE_ITEM as SERVICE_COMPLETE_ITEM, SERVICE_INCOMPLETE_ALL as SERVICE_INCOMPLETE_ALL, SERVICE_INCOMPLETE_ITEM as SERVICE_INCOMPLETE_ITEM, SERVICE_REMOVE_ITEM as SERVICE_REMOVE_ITEM, SERVICE_SORT as SERVICE_SORT
 from _typeshed import Incomplete
 from aiohttp import web as web
@@ -62,6 +63,7 @@ class UpdateShoppingListItemView(http.HomeAssistantView):
 class CreateShoppingListItemView(http.HomeAssistantView):
     url: str
     name: str
+    @RequestDataValidator(vol.Schema({INCOMPLETE: str}))
     async def post(self, request: web.Request, data: dict[str, str]) -> web.Response: ...
 
 class ClearCompletedItemsView(http.HomeAssistantView):
@@ -70,13 +72,19 @@ class ClearCompletedItemsView(http.HomeAssistantView):
     async def post(self, request: web.Request) -> web.Response: ...
 
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items'})
 def websocket_handle_items(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items/add', INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_handle_add(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items/remove', INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_handle_remove(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items/update', INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: bool})
 @websocket_api.async_response
 async def websocket_handle_update(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items/clear'})
 @websocket_api.async_response
 async def websocket_handle_clear(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'shopping_list/items/reorder', INCOMPLETE: [str]})
 def websocket_handle_reorder(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

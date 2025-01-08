@@ -1,3 +1,4 @@
+import voluptuous as vol
 from _typeshed import Incomplete
 from collections import defaultdict
 from collections.abc import Iterable
@@ -31,6 +32,7 @@ class ItemType(StrEnum):
     SCRIPT_BLUEPRINT = 'script_blueprint'
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool: ...
+@websocket_api.websocket_command({INCOMPLETE: 'search/related', INCOMPLETE: vol.Coerce(ItemType), INCOMPLETE: str})
 @callback
 def websocket_search_related(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 

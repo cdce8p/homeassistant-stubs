@@ -15,6 +15,7 @@ STORAGE_KEY: str
 STORAGE_VERSION: int
 
 async def async_setup(hass: HomeAssistant) -> None: ...
+@singleton(KEY_DASHBOARD_MANAGER)
 async def async_get_or_create_dashboard_manager(hass: HomeAssistant) -> ESPHomeDashboardManager: ...
 
 class ESPHomeDashboardManager:

@@ -1,9 +1,12 @@
+import homeassistant.helpers.config_validation as cv
 import jinja2
 import pathlib
+import voluptuous as vol
 from .storage import async_setup_frontend_storage as async_setup_frontend_storage
 from _typeshed import Incomplete
 from aiohttp import web, web_urldispatcher
 from collections.abc import Callable as Callable, Iterator
+from functools import lru_cache
 from homeassistant.components import onboarding as onboarding, websocket_api as websocket_api
 from homeassistant.components.http import HomeAssistantView as HomeAssistantView, KEY_HASS as KEY_HASS, StaticPathConfig as StaticPathConfig
 from homeassistant.components.websocket_api import ActiveConnection as ActiveConnection
@@ -100,6 +103,7 @@ def _frontend_root(dev_repo_path: str | None) -> pathlib.Path: ...
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool: ...
 async def _async_setup_themes(hass: HomeAssistant, themes: dict[str, Any] | None) -> None: ...
 @callback
+@lru_cache(maxsize=1)
 def _async_render_index_cached(template: jinja2.Template, **kwargs: Any) -> str: ...
 
 class IndexView(web_urldispatcher.AbstractResource):
@@ -128,17 +132,23 @@ class ManifestJSONView(HomeAssistantView):
     @callback
     def get(self, request: web.Request) -> web.Response: ...
 
+@websocket_api.websocket_command({'type': 'frontend/get_icons', INCOMPLETE: vol.In(None), INCOMPLETE: vol.All(cv.ensure_list, [str])})
 @websocket_api.async_response
 async def websocket_get_icons(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({'type': 'get_panels'})
 def websocket_get_panels(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({'type': 'frontend/get_themes'})
 def websocket_get_themes(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({'type': 'frontend/get_translations', INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: vol.All(cv.ensure_list, [str]), INCOMPLETE: bool})
 @websocket_api.async_response
 async def websocket_get_translations(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({'type': 'frontend/get_version'})
 @websocket_api.async_response
 async def websocket_get_version(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({'type': 'frontend/subscribe_extra_js'})
 def websocket_subscribe_extra_js(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 
 class PanelRespons(TypedDict):

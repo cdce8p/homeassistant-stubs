@@ -1,3 +1,4 @@
+import voluptuous as vol
 from . import OnboardingData as OnboardingData, OnboardingStorage as OnboardingStorage, OnboardingStoreData as OnboardingStoreData
 from .const import DEFAULT_AREAS as DEFAULT_AREAS, DOMAIN as DOMAIN, STEPS as STEPS, STEP_ANALYTICS as STEP_ANALYTICS, STEP_CORE_CONFIG as STEP_CORE_CONFIG, STEP_INTEGRATION as STEP_INTEGRATION, STEP_USER as STEP_USER
 from _typeshed import Incomplete
@@ -51,6 +52,7 @@ class UserOnboardingView(_BaseOnboardingView):
     name: str
     requires_auth: bool
     step = STEP_USER
+    @RequestDataValidator(vol.Schema({INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str}))
     async def post(self, request: web.Request, data: dict[str, str]) -> web.Response: ...
 
 class CoreConfigOnboardingView(_BaseOnboardingView):
@@ -63,6 +65,7 @@ class IntegrationOnboardingView(_BaseOnboardingView):
     url: str
     name: str
     step = STEP_INTEGRATION
+    @RequestDataValidator(vol.Schema({INCOMPLETE: str, INCOMPLETE: str}))
     async def post(self, request: web.Request, data: dict[str, Any]) -> web.Response: ...
 
 class AnalyticsOnboardingView(_BaseOnboardingView):

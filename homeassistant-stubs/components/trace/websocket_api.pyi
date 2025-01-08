@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .util import async_get_trace as async_get_trace, async_list_contexts as async_list_contexts, async_list_traces as async_list_traces
 from _typeshed import Incomplete
 from homeassistant.components import websocket_api as websocket_api
@@ -13,32 +14,42 @@ TRACE_DOMAINS: Incomplete
 @callback
 def async_setup(hass: HomeAssistant) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/get', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_trace_get(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/list', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_trace_list(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/contexts', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_trace_contexts(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/breakpoint/set', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str})
 def websocket_breakpoint_set(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/breakpoint/clear', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str})
 def websocket_breakpoint_clear(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/breakpoint/list'})
 def websocket_breakpoint_list(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/breakpoint/subscribe'})
 def websocket_subscribe_breakpoint_events(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/continue', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str})
 def websocket_debug_continue(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/step', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str})
 def websocket_debug_step(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'trace/debug/stop', INCOMPLETE: vol.In(TRACE_DOMAINS), INCOMPLETE: str, INCOMPLETE: str})
 def websocket_debug_stop(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

@@ -1,3 +1,4 @@
+import voluptuous as vol
 from _typeshed import Incomplete
 from aiohttp import StreamReader as StreamReader
 from aiohttp.web import Request, Response
@@ -47,7 +48,9 @@ class WebhookView(HomeAssistantView):
     post = _handle
     put = _handle
 
+@websocket_api.websocket_command({'type': 'webhook/list'})
 @callback
 def websocket_list(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'webhook/handle', INCOMPLETE: str, INCOMPLETE: vol.In(SUPPORTED_METHODS), INCOMPLETE: str, INCOMPLETE: {INCOMPLETE: str}, INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_handle(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

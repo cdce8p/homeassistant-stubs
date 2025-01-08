@@ -8,6 +8,7 @@ from typing import Literal, TypedDict
 STORAGE_VERSION: int
 STORAGE_KEY = DOMAIN
 
+@singleton.singleton(<ERROR>.join([<ERROR>.format(DOMAIN, ''), '_manager']))
 async def async_get_manager(hass: HomeAssistant) -> EnergyManager: ...
 
 class FlowFromGridSourceType(TypedDict):

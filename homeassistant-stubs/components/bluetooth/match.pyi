@@ -4,6 +4,7 @@ from _typeshed import Incomplete
 from bleak.backends.scanner import AdvertisementData as AdvertisementData
 from collections import defaultdict
 from dataclasses import dataclass
+from functools import lru_cache
 from homeassistant.core import callback as callback
 from homeassistant.loader import BluetoothMatcher as BluetoothMatcher, BluetoothMatcherOptional as BluetoothMatcherOptional
 from lru import LRU
@@ -79,5 +80,7 @@ class BluetoothCallbackMatcherIndex(BluetoothMatcherIndexBase[BluetoothCallbackM
 
 def _local_name_to_index_key(local_name: str) -> str: ...
 def ble_device_matches(matcher: BluetoothMatcherOptional, service_info: BluetoothServiceInfoBleak) -> bool: ...
+@lru_cache(maxsize=4096, typed=True)
 def _compile_fnmatch(pattern: str) -> re.Pattern: ...
+@lru_cache(maxsize=1024, typed=True)
 def _memorized_fnmatch(name: str, pattern: str) -> bool: ...

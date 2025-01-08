@@ -6,5 +6,6 @@ from homeassistant.helpers.singleton import singleton as singleton
 
 DATA_ADDON_MANAGER: Incomplete
 
+@singleton(DATA_ADDON_MANAGER)
 @callback
 def get_addon_manager(hass: HomeAssistant) -> AddonManager: ...

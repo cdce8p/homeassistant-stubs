@@ -1,10 +1,12 @@
+import voluptuous as vol
 from .const import DOMAIN as DOMAIN
 from .timers import TimerEventType as TimerEventType, TimerInfo as TimerInfo, async_device_supports_timers as async_device_supports_timers, async_register_timer_handler as async_register_timer_handler
 from _typeshed import Incomplete
 from aiohttp import web
 from homeassistant.components import http
+from homeassistant.components.http.data_validator import RequestDataValidator
 from homeassistant.core import HomeAssistant, State
-from homeassistant.helpers import intent
+from homeassistant.helpers import config_validation as cv, intent
 from typing import Any, Protocol
 
 __all__ = ['async_register_timer_handler', 'async_device_supports_timers', 'TimerInfo', 'TimerEventType', 'DOMAIN']
@@ -49,4 +51,5 @@ class RespondIntentHandler(intent.IntentHandler):
 class IntentHandleView(http.HomeAssistantView):
     url: str
     name: str
+    @RequestDataValidator(vol.Schema({INCOMPLETE: cv.string, INCOMPLETE: vol.Schema({INCOMPLETE: object})}))
     async def post(self, request: web.Request, data: dict[str, Any]) -> web.Response: ...

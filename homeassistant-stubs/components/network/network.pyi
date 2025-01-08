@@ -10,6 +10,7 @@ from typing import Any
 
 _LOGGER: Incomplete
 
+@singleton(DATA_NETWORK)
 async def async_get_network(hass: HomeAssistant) -> Network: ...
 
 class Network:

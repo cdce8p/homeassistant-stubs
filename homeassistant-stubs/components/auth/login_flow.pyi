@@ -1,3 +1,4 @@
+import voluptuous as vol
 from . import StoreResultType as StoreResultType, indieauth as indieauth
 from _typeshed import Incomplete
 from aiohttp import web
@@ -45,6 +46,7 @@ class LoginFlowIndexView(LoginFlowBaseView):
     url: str
     name: str
     async def get(self, request: web.Request) -> web.Response: ...
+    @RequestDataValidator(vol.Schema({INCOMPLETE: str, INCOMPLETE: vol.All([vol.Any(str, None)], vol.Length(2, 2), vol.Coerce(tuple)), INCOMPLETE: str, INCOMPLETE: str}))
     @log_invalid_auth
     async def post(self, request: web.Request, data: dict[str, Any]) -> web.Response: ...
 
@@ -52,6 +54,7 @@ class LoginFlowResourceView(LoginFlowBaseView):
     url: str
     name: str
     async def get(self, request: web.Request) -> web.Response: ...
+    @RequestDataValidator(vol.Schema({INCOMPLETE: str}, extra=vol.ALLOW_EXTRA))
     @log_invalid_auth
     async def post(self, request: web.Request, data: dict[str, Any], flow_id: str) -> web.Response: ...
     async def delete(self, request: web.Request, flow_id: str) -> web.Response: ...

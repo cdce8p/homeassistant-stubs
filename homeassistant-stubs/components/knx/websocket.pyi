@@ -26,56 +26,70 @@ def provide_knx(func: KnxAsyncWebSocketCommandHandler) -> websocket_api.const.As
 @overload
 def provide_knx(func: KnxWebSocketCommandHandler) -> websocket_api.const.WebSocketCommandHandler: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/info'})
 @provide_knx
 @callback
 def ws_info(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/get_knx_project'})
 @websocket_api.async_response
 @provide_knx
 async def ws_get_knx_project(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/project_file_process', INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.async_response
 @provide_knx
 async def ws_project_file_process(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/project_file_remove'})
 @websocket_api.async_response
 @provide_knx
 async def ws_project_file_remove(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/group_monitor_info'})
 @provide_knx
 @callback
 def ws_group_monitor_info(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/group_telegrams'})
 @provide_knx
 @callback
 def ws_group_telegrams(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/subscribe_telegrams'})
 @callback
 def ws_subscribe_telegram(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/validate_entity', INCOMPLETE: CREATE_ENTITY_BASE_SCHEMA})
 @callback
 def ws_validate_entity(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/create_entity', INCOMPLETE: CREATE_ENTITY_BASE_SCHEMA})
 @websocket_api.async_response
 @provide_knx
 async def ws_create_entity(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/update_entity', INCOMPLETE: UPDATE_ENTITY_BASE_SCHEMA})
 @websocket_api.async_response
 @provide_knx
 async def ws_update_entity(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/delete_entity', INCOMPLETE: str})
 @websocket_api.async_response
 @provide_knx
 async def ws_delete_entity(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/get_entity_entries'})
 @provide_knx
 @callback
 def ws_get_entity_entries(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/get_entity_config', INCOMPLETE: str})
 @provide_knx
 @callback
 def ws_get_entity_config(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...
 @websocket_api.require_admin
+@websocket_api.websocket_command({INCOMPLETE: 'knx/create_device', INCOMPLETE: str, INCOMPLETE: str})
 @provide_knx
 @callback
 def ws_create_device(hass: HomeAssistant, knx: KNXModule, connection: websocket_api.ActiveConnection, msg: dict) -> None: ...

@@ -6,6 +6,7 @@ from _typeshed import Incomplete
 from abc import abstractmethod
 from aiohttp import web
 from collections.abc import AsyncIterable
+from homeassistant.components import websocket_api
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.restore_state import RestoreEntity

@@ -6,6 +6,7 @@ from .models import Voice as Voice
 from _typeshed import Incomplete
 from aiohttp import web
 from collections.abc import Mapping
+from homeassistant.components import websocket_api
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.restore_state import RestoreEntity

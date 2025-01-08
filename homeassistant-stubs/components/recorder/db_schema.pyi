@@ -11,6 +11,7 @@ from homeassistant.util.json import JSON_DECODE_EXCEPTIONS as JSON_DECODE_EXCEPT
 from sqlalchemy import CHAR, ColumnElement as ColumnElement, DateTime, JSON, LargeBinary
 from sqlalchemy.dialects import sqlite
 from sqlalchemy.engine.interfaces import Dialect as Dialect
+from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.orm import DeclarativeBase, Mapped as Mapped
 from sqlalchemy.types import TypeDecorator as TypeDecorator
 from typing import Any, Final, Self
@@ -56,7 +57,10 @@ _MATCH_ALL_KEEP: Incomplete
 class UnusedDateTime(DateTime): ...
 class Unused(CHAR): ...
 
+@compiles(UnusedDateTime, 'mysql', 'mariadb', 'sqlite')
+@compiles(Unused, 'mysql', 'mariadb', 'sqlite')
 def compile_char_zero(type_: TypeDecorator, compiler: Any, **kw: Any) -> str: ...
+@compiles(Unused, 'postgresql')
 def compile_char_one(type_: TypeDecorator, compiler: Any, **kw: Any) -> str: ...
 
 class FAST_PYSQLITE_DATETIME(sqlite.DATETIME):

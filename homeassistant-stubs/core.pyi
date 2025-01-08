@@ -66,6 +66,7 @@ TIMEOUT_EVENT_START: int
 EVENTS_EXCLUDED_FROM_MATCH_ALL: Incomplete
 _LOGGER: Incomplete
 
+@functools.lru_cache(MAX_EXPECTED_ENTITY_IDS)
 def split_entity_id(entity_id: str) -> tuple[str, str]: ...
 
 _OBJECT_ID: str
@@ -73,7 +74,9 @@ _DOMAIN: Incomplete
 VALID_DOMAIN: Incomplete
 VALID_ENTITY_ID: Incomplete
 
+@functools.lru_cache(64)
 def valid_domain(domain: str) -> bool: ...
+@functools.lru_cache(512)
 def valid_entity_id(entity_id: str) -> bool: ...
 def validate_state(state: str) -> str: ...
 def callback[_CallableT: Callable[..., Any]](func: _CallableT) -> _CallableT: ...

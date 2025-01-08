@@ -11,6 +11,7 @@ from _typeshed import Incomplete
 from collections import defaultdict
 from collections.abc import AsyncGenerator, Callable as Callable, Coroutine, Iterable
 from dataclasses import dataclass
+from functools import lru_cache
 from homeassistant.config_entries import ConfigEntry as ConfigEntry
 from homeassistant.const import CONF_CLIENT_ID as CONF_CLIENT_ID, CONF_PASSWORD as CONF_PASSWORD, CONF_PORT as CONF_PORT, CONF_PROTOCOL as CONF_PROTOCOL, CONF_USERNAME as CONF_USERNAME, EVENT_HOMEASSISTANT_STOP as EVENT_HOMEASSISTANT_STOP
 from homeassistant.core import CALLBACK_TYPE as CALLBACK_TYPE, Event as Event, HassJob as HassJob, HassJobType as HassJobType, HomeAssistant as HomeAssistant, callback as callback, get_hassjob_callable_job_type as get_hassjob_callable_job_type
@@ -152,6 +153,7 @@ class MQTT:
     def _async_mqtt_on_connect(self, _mqttc: mqtt.Client, _userdata: None, _flags: dict[str, int], result_code: int, properties: mqtt.Properties | None = None) -> None: ...
     @callback
     def _async_queue_resubscribe(self) -> None: ...
+    @lru_cache(None)
     def _matching_subscriptions(self, topic: str) -> list[Subscription]: ...
     @callback
     def _async_mqtt_on_message(self, _mqttc: mqtt.Client, _userdata: None, msg: mqtt.MQTTMessage) -> None: ...

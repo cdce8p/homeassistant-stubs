@@ -5,17 +5,22 @@ from typing import Any
 
 @callback
 def async_setup(hass: HomeAssistant) -> bool: ...
+@websocket_api.websocket_command({INCOMPLETE: 'config/auth_provider/homeassistant/create', INCOMPLETE: str, INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.require_admin
 @websocket_api.async_response
 async def websocket_create(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'config/auth_provider/homeassistant/delete', INCOMPLETE: str})
 @websocket_api.require_admin
 @websocket_api.async_response
 async def websocket_delete(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'config/auth_provider/homeassistant/change_password', INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.async_response
 async def websocket_change_password(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'config/auth_provider/homeassistant/admin_change_password', INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.require_admin
 @websocket_api.async_response
 async def websocket_admin_change_password(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'config/auth_provider/homeassistant/admin_change_username', INCOMPLETE: str, INCOMPLETE: str})
 @websocket_api.require_admin
 @websocket_api.async_response
 async def websocket_admin_change_username(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

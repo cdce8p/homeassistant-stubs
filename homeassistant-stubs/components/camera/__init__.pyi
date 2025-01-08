@@ -1,5 +1,6 @@
 import asyncio
 import collections
+import voluptuous as vol
 from .const import CAMERA_IMAGE_TIMEOUT as CAMERA_IMAGE_TIMEOUT, CAMERA_STREAM_SOURCE_TIMEOUT as CAMERA_STREAM_SOURCE_TIMEOUT, CONF_DURATION as CONF_DURATION, CONF_LOOKBACK as CONF_LOOKBACK, CameraState as CameraState, DATA_CAMERA_PREFS as DATA_CAMERA_PREFS, DATA_COMPONENT as DATA_COMPONENT, DOMAIN as DOMAIN, PREF_ORIENTATION as PREF_ORIENTATION, PREF_PRELOAD_STREAM as PREF_PRELOAD_STREAM, SERVICE_RECORD as SERVICE_RECORD, StreamType as StreamType
 from .helper import get_camera_from_entity_id as get_camera_from_entity_id
 from .img_util import scale_jpeg_camera_image as scale_jpeg_camera_image
@@ -19,6 +20,7 @@ from homeassistant.config_entries import ConfigEntry as ConfigEntry
 from homeassistant.const import ATTR_ENTITY_ID as ATTR_ENTITY_ID, CONF_FILENAME as CONF_FILENAME, CONTENT_TYPE_MULTIPART as CONTENT_TYPE_MULTIPART, EVENT_HOMEASSISTANT_STARTED as EVENT_HOMEASSISTANT_STARTED, EVENT_HOMEASSISTANT_STOP as EVENT_HOMEASSISTANT_STOP, SERVICE_TURN_OFF as SERVICE_TURN_OFF, SERVICE_TURN_ON as SERVICE_TURN_ON
 from homeassistant.core import Event as Event, HomeAssistant as HomeAssistant, ServiceCall as ServiceCall, callback as callback
 from homeassistant.exceptions import HomeAssistantError as HomeAssistantError
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.deprecation import DeprecatedConstantEnum as DeprecatedConstantEnum, all_with_deprecated_constants as all_with_deprecated_constants, check_if_deprecated_constant as check_if_deprecated_constant, deprecated_function as deprecated_function, dir_with_deprecated_constants as dir_with_deprecated_constants
 from homeassistant.helpers.entity import Entity as Entity, EntityDescription as EntityDescription
 from homeassistant.helpers.entity_component import EntityComponent as EntityComponent
@@ -206,12 +208,16 @@ class CameraMjpegStream(CameraView):
     name: str
     async def handle(self, request: web.Request, camera: Camera) -> web.StreamResponse: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'camera/capabilities', INCOMPLETE: cv.entity_id})
 @websocket_api.async_response
 async def ws_camera_capabilities(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'camera/stream', INCOMPLETE: cv.entity_id, INCOMPLETE: vol.In(OUTPUT_FORMATS)})
 @websocket_api.async_response
 async def ws_camera_stream(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'camera/get_prefs', INCOMPLETE: cv.entity_id})
 @websocket_api.async_response
 async def websocket_get_prefs(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'camera/update_prefs', INCOMPLETE: cv.entity_id, INCOMPLETE: bool, INCOMPLETE: vol.Coerce(Orientation)})
 @websocket_api.async_response
 async def websocket_update_prefs(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 

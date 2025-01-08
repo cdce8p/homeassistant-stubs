@@ -12,7 +12,7 @@ from homeassistant.components import websocket_api as websocket_api
 from homeassistant.components.websocket_api import ActiveConnection as ActiveConnection
 from homeassistant.const import ATTR_ENTITY_ID as ATTR_ENTITY_ID, CONF_DEVICE_ID as CONF_DEVICE_ID, CONF_DOMAIN as CONF_DOMAIN, CONF_ENTITY_ID as CONF_ENTITY_ID, CONF_PLATFORM as CONF_PLATFORM
 from homeassistant.core import HomeAssistant as HomeAssistant, callback as callback
-from homeassistant.helpers import entity_registry as er
+from homeassistant.helpers import config_validation as cv, entity_registry as er
 from homeassistant.helpers.typing import ConfigType as ConfigType, VolSchemaType as VolSchemaType
 from homeassistant.loader import IntegrationNotFound as IntegrationNotFound
 from homeassistant.requirements import RequirementsNotFound as RequirementsNotFound, async_get_integration_with_requirements as async_get_integration_with_requirements
@@ -56,21 +56,27 @@ def async_get_entity_registry_entry_or_raise(hass: HomeAssistant, entity_registr
 @callback
 def async_validate_entity_schema(hass: HomeAssistant, config: ConfigType, schema: VolSchemaType) -> ConfigType: ...
 def handle_device_errors(func: Callable[[HomeAssistant, ActiveConnection, dict[str, Any]], Awaitable[None]]) -> Callable[[HomeAssistant, ActiveConnection, dict[str, Any]], Coroutine[Any, Any, None]]: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/action/list', INCOMPLETE: str})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_list_actions(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/condition/list', INCOMPLETE: str})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_list_conditions(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/trigger/list', INCOMPLETE: str})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_list_triggers(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/action/capabilities', INCOMPLETE: dict})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_get_action_capabilities(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/condition/capabilities', INCOMPLETE: cv.DEVICE_CONDITION_BASE_SCHEMA.extend({}, extra=vol.ALLOW_EXTRA)})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_get_condition_capabilities(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'device_automation/trigger/capabilities', INCOMPLETE: vol.All(cv._trigger_pre_validator, DEVICE_TRIGGER_BASE_SCHEMA.extend({}, extra=vol.ALLOW_EXTRA))})
 @websocket_api.async_response
 @handle_device_errors
 async def websocket_device_automation_get_trigger_capabilities(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...

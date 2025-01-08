@@ -9,6 +9,7 @@ from _typeshed import Incomplete
 from collections.abc import Mapping
 from datetime import datetime
 from enum import StrEnum
+from functools import lru_cache
 from homeassistant.config_entries import ConfigEntry as ConfigEntry
 from homeassistant.const import EVENT_HOMEASSISTANT_STARTED as EVENT_HOMEASSISTANT_STARTED, EVENT_HOMEASSISTANT_STOP as EVENT_HOMEASSISTANT_STOP
 from homeassistant.core import Event as Event, HomeAssistant as HomeAssistant, ReleaseChannel as ReleaseChannel, callback as callback, get_release_channel as get_release_channel
@@ -157,6 +158,7 @@ class DeletedDeviceEntry:
     def __gt__(self, other): ...
     def __ge__(self, other): ...
 
+@lru_cache(maxsize=512)
 def format_mac(mac: str) -> str: ...
 
 class DeviceRegistryStore(storage.Store[dict[str, list[dict[str, Any]]]]):
@@ -217,6 +219,7 @@ class DeviceRegistry(BaseRegistry[dict[str, list[dict[str, Any]]]]):
     def async_clear_label_id(self, label_id: str) -> None: ...
 
 @callback
+@singleton(DATA_REGISTRY)
 def async_get(hass: HomeAssistant) -> DeviceRegistry: ...
 async def async_load(hass: HomeAssistant) -> None: ...
 @callback

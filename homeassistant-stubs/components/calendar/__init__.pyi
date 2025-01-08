@@ -1,5 +1,6 @@
 import dataclasses
 import datetime
+import voluptuous as vol
 from .const import CONF_EVENT as CONF_EVENT, CalendarEntityFeature as CalendarEntityFeature, DATA_COMPONENT as DATA_COMPONENT, DOMAIN as DOMAIN, EVENT_DESCRIPTION as EVENT_DESCRIPTION, EVENT_DURATION as EVENT_DURATION, EVENT_END as EVENT_END, EVENT_END_DATE as EVENT_END_DATE, EVENT_END_DATETIME as EVENT_END_DATETIME, EVENT_IN as EVENT_IN, EVENT_IN_DAYS as EVENT_IN_DAYS, EVENT_IN_WEEKS as EVENT_IN_WEEKS, EVENT_LOCATION as EVENT_LOCATION, EVENT_RECURRENCE_ID as EVENT_RECURRENCE_ID, EVENT_RECURRENCE_RANGE as EVENT_RECURRENCE_RANGE, EVENT_RRULE as EVENT_RRULE, EVENT_START as EVENT_START, EVENT_START_DATE as EVENT_START_DATE, EVENT_START_DATETIME as EVENT_START_DATETIME, EVENT_SUMMARY as EVENT_SUMMARY, EVENT_TIME_FIELDS as EVENT_TIME_FIELDS, EVENT_TYPES as EVENT_TYPES, EVENT_UID as EVENT_UID, LIST_EVENT_FIELDS as LIST_EVENT_FIELDS
 from _typeshed import Incomplete
 from aiohttp import web
@@ -10,6 +11,7 @@ from homeassistant.config_entries import ConfigEntry as ConfigEntry
 from homeassistant.const import STATE_OFF as STATE_OFF, STATE_ON as STATE_ON
 from homeassistant.core import CALLBACK_TYPE as CALLBACK_TYPE, HomeAssistant as HomeAssistant, ServiceCall as ServiceCall, ServiceResponse as ServiceResponse, SupportsResponse as SupportsResponse, callback as callback
 from homeassistant.exceptions import HomeAssistantError as HomeAssistantError
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity as Entity, EntityDescription as EntityDescription
 from homeassistant.helpers.entity_component import EntityComponent as EntityComponent
 from homeassistant.helpers.event import async_track_point_in_time as async_track_point_in_time
@@ -110,10 +112,13 @@ class CalendarListView(http.HomeAssistantView):
     def __init__(self, component: EntityComponent[CalendarEntity]) -> None: ...
     async def get(self, request: web.Request) -> web.Response: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'calendar/event/create', INCOMPLETE: cv.entity_id, INCOMPLETE: WEBSOCKET_EVENT_SCHEMA})
 @websocket_api.async_response
 async def handle_calendar_event_create(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'calendar/event/delete', INCOMPLETE: cv.entity_id, INCOMPLETE: cv.string, INCOMPLETE: vol.Any(vol.All(cv.string, _empty_as_none), None), INCOMPLETE: cv.string})
 @websocket_api.async_response
 async def handle_calendar_event_delete(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'calendar/event/update', INCOMPLETE: cv.entity_id, INCOMPLETE: cv.string, INCOMPLETE: vol.Any(vol.All(cv.string, _empty_as_none), None), INCOMPLETE: cv.string, INCOMPLETE: WEBSOCKET_EVENT_SCHEMA})
 @websocket_api.async_response
 async def handle_calendar_event_update(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
 def _validate_timespan(values: dict[str, Any]) -> tuple[datetime.datetime | datetime.date, datetime.datetime | datetime.date]: ...

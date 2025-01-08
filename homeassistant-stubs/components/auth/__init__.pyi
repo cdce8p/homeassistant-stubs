@@ -1,3 +1,4 @@
+import voluptuous as vol
 from . import indieauth as indieauth, login_flow as login_flow, mfa_setup_flow as mfa_setup_flow
 from _typeshed import Incomplete
 from aiohttp import web
@@ -11,6 +12,7 @@ from homeassistant.components.http.ban import log_invalid_auth as log_invalid_au
 from homeassistant.components.http.data_validator import RequestDataValidator as RequestDataValidator
 from homeassistant.components.http.view import HomeAssistantView as HomeAssistantView
 from homeassistant.core import HomeAssistant as HomeAssistant, callback as callback
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.config_entry_oauth2_flow import OAuth2AuthorizeCallbackView as OAuth2AuthorizeCallbackView
 from homeassistant.helpers.typing import ConfigType as ConfigType
 from homeassistant.loader import bind_hass as bind_hass
@@ -53,21 +55,36 @@ class LinkUserView(HomeAssistantView):
     name: str
     _retrieve_credentials: Incomplete
     def __init__(self, retrieve_credentials: RetrieveResultType) -> None: ...
+    @RequestDataValidator(vol.Schema({'code': str, 'client_id': str}))
     async def post(self, request: web.Request, data: dict[str, Any]) -> web.Response: ...
 
 @callback
 def _create_auth_code_store() -> tuple[StoreResultType, RetrieveResultType]: ...
+@websocket_api.websocket_command({INCOMPLETE: 'auth/current_user'})
+@websocket_api.ws_require_user()
 @websocket_api.async_response
 async def websocket_current_user(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'auth/long_lived_access_token', INCOMPLETE: int, INCOMPLETE: str, INCOMPLETE: str})
+@websocket_api.ws_require_user()
 @websocket_api.async_response
 async def websocket_create_long_lived_access_token(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'auth/refresh_tokens'})
+@websocket_api.ws_require_user()
 @callback
 def websocket_refresh_tokens(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'auth/delete_refresh_token', INCOMPLETE: str})
+@websocket_api.ws_require_user()
 def websocket_delete_refresh_token(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'auth/delete_all_refresh_tokens', INCOMPLETE: cv.string, INCOMPLETE: bool})
+@websocket_api.ws_require_user()
 def websocket_delete_all_refresh_tokens(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'auth/sign_path', INCOMPLETE: str, INCOMPLETE: int})
+@websocket_api.ws_require_user()
 @callback
 def websocket_sign_path(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'auth/refresh_token_set_expiry', INCOMPLETE: str, INCOMPLETE: bool})
+@websocket_api.ws_require_user()
 def websocket_refresh_token_set_expiry(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

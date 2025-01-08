@@ -10,18 +10,25 @@ from mysensors import Message as Message
 
 HANDLERS: decorator.Registry[str, Callable[[HomeAssistant, GatewayId, Message], None]]
 
+@HANDLERS.register('set')
 @callback
 def handle_set(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('internal')
 @callback
 def handle_internal(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('I_BATTERY_LEVEL')
 @callback
 def handle_battery_level(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('I_HEARTBEAT_RESPONSE')
 @callback
 def handle_heartbeat(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('I_SKETCH_NAME')
 @callback
 def handle_sketch_name(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('I_SKETCH_VERSION')
 @callback
 def handle_sketch_version(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
+@HANDLERS.register('presentation')
 @callback
 def handle_presentation(hass: HomeAssistant, gateway_id: GatewayId, msg: Message) -> None: ...
 @callback

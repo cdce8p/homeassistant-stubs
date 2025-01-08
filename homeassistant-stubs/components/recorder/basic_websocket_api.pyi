@@ -5,5 +5,6 @@ from typing import Any
 
 @callback
 def async_setup(hass: HomeAssistant) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'recorder/info'})
 @callback
 def ws_info(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

@@ -26,5 +26,6 @@ class StatisticsConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
     @staticmethod
     async def async_setup_preview(hass: HomeAssistant) -> None: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'statistics/start_preview', INCOMPLETE: str, INCOMPLETE: vol.Any('config_flow', 'options_flow'), INCOMPLETE: dict})
 @websocket_api.async_response
 async def ws_start_preview(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .const import LOGSEVERITY as LOGSEVERITY
 from .helpers import LogPersistance as LogPersistance, LogSettingsType as LogSettingsType, LoggerSetting as LoggerSetting, async_get_domain_config as async_get_domain_config, get_logger as get_logger
 from homeassistant.components import websocket_api as websocket_api
@@ -10,8 +11,11 @@ from typing import Any
 @callback
 def async_load_websocket_api(hass: HomeAssistant) -> None: ...
 @callback
+@websocket_api.websocket_command({INCOMPLETE: 'logger/log_info'})
 def handle_integration_log_info(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'logger/integration_log_level', INCOMPLETE: str, INCOMPLETE: vol.In(LOGSEVERITY), INCOMPLETE: vol.Coerce(LogPersistance)})
 @websocket_api.async_response
 async def handle_integration_log_level(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...
+@websocket_api.websocket_command({INCOMPLETE: 'logger/log_level', INCOMPLETE: str, INCOMPLETE: vol.In(LOGSEVERITY), INCOMPLETE: vol.Coerce(LogPersistance)})
 @websocket_api.async_response
 async def handle_module_log_level(hass: HomeAssistant, connection: ActiveConnection, msg: dict[str, Any]) -> None: ...

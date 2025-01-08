@@ -6,6 +6,7 @@ from _typeshed import Incomplete
 from aiodiscover import DiscoverHosts
 from collections.abc import Callable as Callable
 from dataclasses import dataclass
+from functools import lru_cache
 from homeassistant import config_entries as config_entries
 from homeassistant.components.device_tracker import ATTR_HOST_NAME as ATTR_HOST_NAME, ATTR_IP as ATTR_IP, ATTR_MAC as ATTR_MAC, ATTR_SOURCE_TYPE as ATTR_SOURCE_TYPE, CONNECTED_DEVICE_REGISTERED as CONNECTED_DEVICE_REGISTERED, SourceType as SourceType
 from homeassistant.const import EVENT_HOMEASSISTANT_STARTED as EVENT_HOMEASSISTANT_STARTED, EVENT_HOMEASSISTANT_STOP as EVENT_HOMEASSISTANT_STOP, STATE_HOME as STATE_HOME
@@ -96,5 +97,7 @@ class RediscoveryWatcher(WatcherBase):
     @callback
     def async_start(self) -> None: ...
 
+@lru_cache(maxsize=4096, typed=True)
 def _compile_fnmatch(pattern: str) -> re.Pattern: ...
+@lru_cache(maxsize=1024, typed=True)
 def _memorized_fnmatch(name: str, pattern: str) -> bool: ...

@@ -1,3 +1,4 @@
+import voluptuous as vol
 from .binary_sensor import ThresholdSensor as ThresholdSensor
 from .const import CONF_HYSTERESIS as CONF_HYSTERESIS, CONF_LOWER as CONF_LOWER, CONF_UPPER as CONF_UPPER, DEFAULT_HYSTERESIS as DEFAULT_HYSTERESIS, DOMAIN as DOMAIN
 from _typeshed import Incomplete
@@ -24,5 +25,6 @@ class ConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
     @staticmethod
     async def async_setup_preview(hass: HomeAssistant) -> None: ...
 
+@websocket_api.websocket_command({INCOMPLETE: 'threshold/start_preview', INCOMPLETE: str, INCOMPLETE: vol.Any('config_flow', 'options_flow'), INCOMPLETE: dict})
 @callback
 def ws_start_preview(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]) -> None: ...

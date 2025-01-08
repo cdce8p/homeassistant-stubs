@@ -9,6 +9,7 @@ from home_assistant_bluetooth import BluetoothServiceInfoBleak as BluetoothServi
 from homeassistant.core import CALLBACK_TYPE as CALLBACK_TYPE, HomeAssistant as HomeAssistant, callback as hass_callback
 from homeassistant.helpers.singleton import singleton as singleton
 
+@singleton(DATA_MANAGER)
 def _get_manager(hass: HomeAssistant) -> HomeAssistantBluetoothManager: ...
 @hass_callback
 def async_get_scanner(hass: HomeAssistant) -> HaBleakScannerWrapper: ...
