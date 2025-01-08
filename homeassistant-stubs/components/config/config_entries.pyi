@@ -13,6 +13,7 @@ from homeassistant.helpers.json import json_fragment as json_fragment
 from homeassistant.loader import Integration as Integration, IntegrationNotFound as IntegrationNotFound, async_get_config_flows as async_get_config_flows, async_get_integrations as async_get_integrations, async_get_loaded_integration as async_get_loaded_integration
 from typing import Any, NoReturn
 
+@callback
 def async_setup(hass: HomeAssistant) -> bool: ...
 
 class ConfigManagerEntryIndexView(HomeAssistantView):

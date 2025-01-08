@@ -28,6 +28,7 @@ class EsphomeClimateEntity(EsphomeEntity[ClimateInfo, ClimateState], ClimateEnti
     _attr_min_humidity: Incomplete
     _attr_max_humidity: Incomplete
     _attr_supported_features: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     def _get_precision(self) -> float: ...
     @property

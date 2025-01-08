@@ -4,7 +4,7 @@ from _typeshed import Incomplete
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.entity_platform import EntityPlatform
@@ -48,6 +48,7 @@ class SensorEntity(Entity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
     _sensor_option_unit_of_measurement: str | None | UndefinedType
     _invalid_suggested_unit_of_measurement_reported: bool
     registry_entry: Incomplete
+    @callback
     def add_to_platform_start(self, hass: HomeAssistant, platform: EntityPlatform, parallel_updates: asyncio.Semaphore | None) -> None: ...
     async def async_internal_added_to_hass(self) -> None: ...
     def _default_to_device_class_name(self) -> bool: ...
@@ -83,7 +84,9 @@ class SensorEntity(Entity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
     def _display_precision_or_none(self) -> int | None: ...
     def _update_suggested_precision(self) -> None: ...
     def _custom_unit_or_undef(self, primary_key: str, secondary_key: str) -> str | None | UndefinedType: ...
+    @callback
     def async_registry_entry_updated(self) -> None: ...
+    @callback
     def _async_read_entity_options(self) -> None: ...
 
 @dataclass

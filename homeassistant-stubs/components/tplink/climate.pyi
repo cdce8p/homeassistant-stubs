@@ -37,5 +37,6 @@ class TPLinkClimateEntity(CoordinatedTPLinkEntity, ClimateEntity):
     _attr_target_temperature: Incomplete
     _attr_hvac_mode: Incomplete
     _attr_hvac_action: Incomplete
+    @callback
     def _async_update_attrs(self) -> bool: ...
     def _get_unique_id(self) -> str: ...

@@ -19,6 +19,7 @@ class EsphomeAlarmControlPanel(EsphomeEntity[AlarmControlPanelInfo, ESPHomeAlarm
     _attr_supported_features: Incomplete
     _attr_code_format: Incomplete
     _attr_code_arm_required: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def alarm_state(self) -> AlarmControlPanelState | None: ...

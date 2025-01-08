@@ -9,6 +9,7 @@ from typing import Any
 class EsphomeSwitch(EsphomeEntity[SwitchInfo, SwitchState], SwitchEntity):
     _attr_assumed_state: Incomplete
     _attr_device_class: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def is_on(self) -> bool | None: ...

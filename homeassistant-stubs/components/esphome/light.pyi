@@ -39,6 +39,7 @@ class EsphomeLight(EsphomeEntity[LightInfo, LightState], LightEntity):
     _attr_effect_list: Incomplete
     _attr_min_color_temp_kelvin: Incomplete
     _attr_max_color_temp_kelvin: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
 
 async_setup_entry: Incomplete

@@ -15,6 +15,7 @@ ATTR_BYPASS_PROXY: str
 class EsphomeMediaPlayer(EsphomeEntity[MediaPlayerInfo, MediaPlayerEntityState], MediaPlayerEntity):
     _attr_device_class: Incomplete
     _attr_supported_features: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def state(self) -> MediaPlayerState | None: ...

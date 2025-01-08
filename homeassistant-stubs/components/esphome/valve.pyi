@@ -11,6 +11,7 @@ class EsphomeValve(EsphomeEntity[ValveInfo, ValveState], ValveEntity):
     _attr_device_class: Incomplete
     _attr_assumed_state: Incomplete
     _attr_reports_position: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def is_closed(self) -> bool: ...

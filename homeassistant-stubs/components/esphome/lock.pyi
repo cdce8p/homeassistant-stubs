@@ -10,6 +10,7 @@ class EsphomeLock(EsphomeEntity[LockInfo, LockEntityState], LockEntity):
     _attr_assumed_state: Incomplete
     _attr_supported_features: Incomplete
     _attr_code_format: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def is_locked(self) -> bool | None: ...

@@ -10,6 +10,7 @@ class EsphomeCover(EsphomeEntity[CoverInfo, CoverState], CoverEntity):
     _attr_supported_features: Incomplete
     _attr_device_class: Incomplete
     _attr_assumed_state: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def is_closed(self) -> bool | None: ...

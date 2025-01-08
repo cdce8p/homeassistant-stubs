@@ -8,6 +8,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession as asyn
 from homeassistant.util import location as location, unit_system as unit_system
 from typing import Any
 
+@callback
 def async_setup(hass: HomeAssistant) -> bool: ...
 
 class CheckConfigView(HomeAssistantView):

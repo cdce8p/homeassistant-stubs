@@ -4,12 +4,14 @@ from .models import DetectionResult as DetectionResult, WakeWord as WakeWord
 from _typeshed import Incomplete
 from abc import abstractmethod
 from collections.abc import AsyncIterable
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.restore_state import RestoreEntity
 
 __all__ = ['async_default_entity', 'async_get_wake_word_detection_entity', 'DetectionResult', 'DOMAIN', 'WakeWord', 'WakeWordDetectionEntity']
 
+@callback
 def async_default_entity(hass: HomeAssistant) -> str | None: ...
+@callback
 def async_get_wake_word_detection_entity(hass: HomeAssistant, entity_id: str) -> WakeWordDetectionEntity | None: ...
 
 class WakeWordDetectionEntity(RestoreEntity, metaclass=abc.ABCMeta):

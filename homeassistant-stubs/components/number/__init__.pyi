@@ -2,6 +2,7 @@ import dataclasses
 from .const import ATTR_MAX as ATTR_MAX, ATTR_MIN as ATTR_MIN, ATTR_STEP as ATTR_STEP, ATTR_VALUE as ATTR_VALUE, DEFAULT_MAX_VALUE as DEFAULT_MAX_VALUE, DEFAULT_MIN_VALUE as DEFAULT_MIN_VALUE, DEFAULT_STEP as DEFAULT_STEP, DOMAIN as DOMAIN, NumberDeviceClass as NumberDeviceClass, NumberMode as NumberMode
 from _typeshed import Incomplete
 from collections.abc import Callable
+from homeassistant.core import callback
 from homeassistant.helpers.entity import Entity, EntityDescription
 from homeassistant.helpers.restore_state import ExtraStoredData, RestoreEntity
 from propcache import cached_property
@@ -80,6 +81,7 @@ class NumberEntity(Entity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
     async def async_set_value(self, value: float) -> None: ...
     def _convert_to_state_value(self, value: float, method: Callable[[float, int], float], device_class: NumberDeviceClass | None) -> float: ...
     def convert_to_native_value(self, value: float) -> float: ...
+    @callback
     def async_registry_entry_updated(self) -> None: ...
 
 @dataclasses.dataclass

@@ -12,6 +12,7 @@ class EsphomeText(EsphomeEntity[TextInfo, TextState], TextEntity):
     _attr_native_max: Incomplete
     _attr_pattern: Incomplete
     _attr_mode: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
     @property
     def native_value(self) -> str | None: ...

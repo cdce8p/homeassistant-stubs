@@ -5,6 +5,7 @@ from homeassistant.core import HomeAssistant as HomeAssistant, callback as callb
 from homeassistant.exceptions import HomeAssistantError as HomeAssistantError
 from homeassistant.util import slugify as slugify
 
+@callback
 def async_register_http_views(hass: HomeAssistant) -> None: ...
 
 class DownloadBackupView(HomeAssistantView):

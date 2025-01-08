@@ -32,6 +32,7 @@ class EsphomeFan(EsphomeEntity[FanInfo, FanState], FanEntity):
     _attr_supported_features: Incomplete
     _attr_preset_modes: Incomplete
     _attr_speed_count: Incomplete
+    @callback
     def _on_static_info_update(self, static_info: EntityInfo) -> None: ...
 
 async_setup_entry: Incomplete

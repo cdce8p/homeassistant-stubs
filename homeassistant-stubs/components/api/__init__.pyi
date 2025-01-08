@@ -1,3 +1,4 @@
+import homeassistant.core as ha
 from _typeshed import Incomplete
 from aiohttp import web
 from homeassistant.auth.models import User as User
@@ -34,11 +35,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool: ...
 class APIStatusView(HomeAssistantView):
     url = URL_API
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 class APICoreStateView(HomeAssistantView):
     url = URL_API_CORE_STATE
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 class APIEventStream(HomeAssistantView):
@@ -49,23 +52,28 @@ class APIEventStream(HomeAssistantView):
 class APIConfigView(HomeAssistantView):
     url = URL_API_CONFIG
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 class APIStatesView(HomeAssistantView):
     url = URL_API_STATES
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 class APIEntityStateView(HomeAssistantView):
     url: str
     name: str
+    @ha.callback
     def get(self, request: web.Request, entity_id: str) -> web.Response: ...
     async def post(self, request: web.Request, entity_id: str) -> web.Response: ...
+    @ha.callback
     def delete(self, request: web.Request, entity_id: str) -> web.Response: ...
 
 class APIEventListenersView(HomeAssistantView):
     url = URL_API_EVENTS
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 class APIEventView(HomeAssistantView):
@@ -86,6 +94,7 @@ class APIDomainServicesView(HomeAssistantView):
 class APIComponentsView(HomeAssistantView):
     url = URL_API_COMPONENTS
     name: str
+    @ha.callback
     def get(self, request: web.Request) -> web.Response: ...
 
 def _cached_template(template_str: str, hass: HomeAssistant) -> template.Template: ...
@@ -101,4 +110,5 @@ class APIErrorLog(HomeAssistantView):
     async def get(self, request: web.Request) -> web.FileResponse: ...
 
 async def async_services_json(hass: HomeAssistant) -> list[dict[str, Any]]: ...
+@ha.callback
 def async_events_json(hass: HomeAssistant) -> list[dict[str, Any]]: ...

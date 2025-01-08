@@ -17,6 +17,7 @@ from homeassistant.helpers.network import is_cloud_connection as is_cloud_connec
 from homeassistant.util.network import is_local as is_local
 from typing import Any
 
+@callback
 def async_setup(hass: HomeAssistant, store_result: Callable[[str, Credentials], str]) -> None: ...
 
 class WellKnownOAuthInfoView(HomeAssistantView):
