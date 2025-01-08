@@ -325,7 +325,12 @@ def generate_stubs(typed_paths: list[Path], repo_root: Path) -> None:
             "stubgen",
             "--include-private",
             "--preserve-decorators",
-            "propcache.cached_property:propcache.under_cached_property",
+            ":".join([
+                "propcache.cached_property",
+                "propcache.under_cached_property",
+                "homeassistant.core.callback",
+                "homeassistant.loader.bind_hass",
+            ]),
             "-o",
             str(repo_root),
             f"@{f.name}",
